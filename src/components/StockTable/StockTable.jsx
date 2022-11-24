@@ -6,10 +6,10 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { Link } from "react-router-dom";
 
 export const StockTable = () => {
   let stockData = useInstruments();
-  console.log(stockData);
 
   const columns = [
     {
@@ -51,7 +51,9 @@ export const StockTable = () => {
             {stockData.map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
-                  <TableCell align="center">{row.Symbol}</TableCell>
+                  <TableCell align="center">
+                    <Link to={`/quotes/${row.Symbol}`}>{row.Symbol}</Link>
+                  </TableCell>
                   <TableCell align="center">{row.Name}</TableCell>
                   <TableCell align="center">{row.Sector}</TableCell>
                   <TableCell align="center">{row.Validtill}</TableCell>
