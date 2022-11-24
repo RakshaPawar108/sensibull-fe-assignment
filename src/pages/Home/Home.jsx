@@ -1,3 +1,9 @@
+import { StockTable } from "../../components";
+
 export const Home = () => {
-  return <div>Home Page</div>;
+  return (
+    <div>
+      <StockTable />
+    </div>
+  );
 };
