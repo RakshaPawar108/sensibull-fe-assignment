@@ -1,1 +1,1 @@
-export {InstrumentProvider, useInstruments} from './instruments-context'
+export { InstrumentProvider, useInstruments } from "./instruments-context";
