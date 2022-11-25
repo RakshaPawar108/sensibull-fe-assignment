@@ -7,9 +7,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
+import { Searchbar } from "../Searchbar/Searchbar";
+import { useEffect, useState } from "react";
 
 export const StockTable = () => {
   let stockData = useInstruments();
+  let [filteredData, setFilteredData] = useState([]);
 
   const columns = [
     {
@@ -34,35 +37,61 @@ export const StockTable = () => {
     },
   ];
 
+  useEffect(() => {
+    setFilteredData(stockData);
+  }, [stockData]);
+
+  const searchHandler = (searchVal) => {
+    searchVal = searchVal.toLowerCase();
+
+    filteredData = stockData.filter((el) => {
+      if (searchVal === "") {
+        return el;
+      } else {
+        let symbol = el.Symbol.toLowerCase();
+        let name = "";
+        if (el.Name) {
+          name = el.Name.split(" ").join("").toLowerCase();
+        }
+        return symbol.includes(searchVal) || name.includes(searchVal);
+      }
+    });
+
+    setFilteredData(filteredData);
+  };
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: "80vh" }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell key={column.id} align={column.align}>
-                  {column.label.toUpperCase()}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {stockData.map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
-                  <TableCell align="center">
-                    <Link to={`/quotes/${row.Symbol}`}>{row.Symbol}</Link>
+    <>
+      <Searchbar searchHandler={searchHandler} />
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer sx={{ maxHeight: "80vh" }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell key={column.id} align={column.align}>
+                    {column.label.toUpperCase()}
                   </TableCell>
-                  <TableCell align="center">{row.Name}</TableCell>
-                  <TableCell align="center">{row.Sector}</TableCell>
-                  <TableCell align="center">{row.Validtill}</TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {filteredData.map((row) => {
+                return (
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
+                    <TableCell align="center">
+                      <Link to={`/quotes/${row.Symbol}`}>{row.Symbol}</Link>
+                    </TableCell>
+                    <TableCell align="center">{row.Name}</TableCell>
+                    <TableCell align="center">{row.Sector}</TableCell>
+                    <TableCell align="center">{row.Validtill}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 };
