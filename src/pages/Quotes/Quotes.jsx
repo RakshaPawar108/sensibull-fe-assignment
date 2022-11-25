@@ -3,7 +3,7 @@ import { QuotesList } from "../../components";
 
 export const Quotes = () => {
   return (
-    <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+    <Box sx={{ bgcolor: "background.paper" }}>
       <QuotesList />
     </Box>
   );
