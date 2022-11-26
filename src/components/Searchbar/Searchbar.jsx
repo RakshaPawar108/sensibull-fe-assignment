@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, Input, InputAdornment } from "@mui/material";
+import { SearchSharp } from "@mui/icons-material";
 
 export const Searchbar = ({ searchHandler }) => {
   return (
@@ -8,7 +9,11 @@ export const Searchbar = ({ searchHandler }) => {
         size="small"
         id="searchbar"
         onKeyUp={(e) => searchHandler(e.target.value)}
-        startAdornment={<InputAdornment position="start">Icon</InputAdornment>}
+        startAdornment={
+          <InputAdornment position="start">
+            <SearchSharp />
+          </InputAdornment>
+        }
       />
     </FormControl>
   );
