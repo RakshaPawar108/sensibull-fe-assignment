@@ -100,13 +100,13 @@ export const StockTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData.map((row, idx) => {
+              {filteredData.map((row) => {
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={row.idx}
+                    key={row.Symbol}
                     className="table-body-row"
                   >
                     <TableCell align="center" className="table-body-cell">
