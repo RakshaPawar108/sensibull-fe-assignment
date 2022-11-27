@@ -109,7 +109,7 @@ export const StockTable = () => {
                     key={row.idx}
                     className="table-body-row"
                   >
-                    <TableCell align="center" className="table-body-cell" >
+                    <TableCell align="center" className="table-body-cell">
                       <Link
                         className="symbol-link"
                         to={`/quotes/${row.Symbol}`}
