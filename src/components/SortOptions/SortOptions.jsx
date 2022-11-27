@@ -3,7 +3,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useTheme } from "@mui/material";
-export const SortOptions = ({ sortByTime }) => {
+export const SortOptions = ({ sortByTime, sortVal }) => {
   const theme = useTheme();
   return (
     <FormControl
@@ -14,7 +14,7 @@ export const SortOptions = ({ sortByTime }) => {
       <Select
         labelId="sortSelect"
         id="sortSel"
-        value=""
+        value={sortVal}
         label="Sort by"
         sx={{ marginBottom: "2rem" }}
         autoWidth

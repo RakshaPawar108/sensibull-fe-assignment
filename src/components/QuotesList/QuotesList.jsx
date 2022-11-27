@@ -20,11 +20,12 @@ export const QuotesList = () => {
   const [validTill, setValidTill] = useState();
   const [currentTime, setCurrentTime] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [sortVal, setSortVal] = useState("");
   const theme = useTheme();
 
   useEffect(() => {
     getQuotes(setQuotes, location);
-    setIsLoading(false)
+    setIsLoading(false);
   }, [location]);
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export const QuotesList = () => {
   }, [validTill, currentTime, quotes, location]);
 
   const sortByTime = (sortVal) => {
+    setSortVal(sortVal);
     let sortedQuotes = quotes;
     if (sortVal === "reset") {
       getQuotes(setQuotes, location);
@@ -79,8 +81,13 @@ export const QuotesList = () => {
           Back to Home Page
         </Link>
       </Button>
-      <Typography sx={{fontSize:'1.2rem', textAlign: 'center', margin:'0.5rem'}}>Quotes for {location}</Typography>
-      <SortOptions sortByTime={sortByTime} />
+      <Typography
+        sx={{ fontSize: "1.2rem", textAlign: "center", margin: "0.5rem" }}
+      >
+        Quotes for {location}
+      </Typography>
+      <SortOptions sortByTime={sortByTime} sortVal={sortVal} />
+
       {isLoading && <Loader />}
       {!isLoading && (
         <nav className="list-wrapper">
