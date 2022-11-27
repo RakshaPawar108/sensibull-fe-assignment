@@ -2,14 +2,20 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-export const SortOptions = ({ sortByTime, sortVal }) => {
+import { useTheme } from "@mui/material";
+export const SortOptions = ({ sortByTime }) => {
+  const theme = useTheme();
   return (
-    <FormControl size="small" fullWidth>
+    <FormControl
+      size="small"
+      sx={{ margin: theme.spacing(0, "40%"), width: "20%" }}
+    >
       <InputLabel id="sortSelect">Sort by Time</InputLabel>
       <Select
         labelId="sortSelect"
         id="sortSel"
         label="Sort by"
+        sx={{ marginBottom: "2rem" }}
         autoWidth
         onChange={(e) => sortByTime(e.target.value)}
       >
