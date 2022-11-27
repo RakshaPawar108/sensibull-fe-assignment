@@ -31,7 +31,7 @@ export const QuotesList = () => {
     const valid_till_array = quotes.map((item) => item.valid_till);
     valid_till_array.sort((a, b) => (a > b ? 1 : b > a ? -1 : 0));
     setValidTill(valid_till_array[0]);
-    console.log(validTill, currentTime);
+    // console.log(validTill, currentTime);
 
     const interval = setInterval(
       () => getQuotes(setQuotes, location),

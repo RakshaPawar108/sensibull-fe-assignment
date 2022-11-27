@@ -14,6 +14,7 @@ export const SortOptions = ({ sortByTime }) => {
       <Select
         labelId="sortSelect"
         id="sortSel"
+        value=""
         label="Sort by"
         sx={{ marginBottom: "2rem" }}
         autoWidth
