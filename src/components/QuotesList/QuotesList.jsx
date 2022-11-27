@@ -72,13 +72,14 @@ export const QuotesList = () => {
     <>
       <Button
         className="back-btn"
-        sx={{ marginLeft: "10rem", marginBottom: "2rem" }}
+        sx={{ marginLeft: "10rem", marginBottom: "1rem" }}
         startIcon={<ArrowBackIos />}
       >
         <Link className="back-link" to="/">
           Back to Home Page
         </Link>
       </Button>
+      <Typography sx={{fontSize:'1.2rem', textAlign: 'center', margin:'0.5rem'}}>Quotes for {location}</Typography>
       <SortOptions sortByTime={sortByTime} />
       {isLoading && <Loader />}
       {!isLoading && (
