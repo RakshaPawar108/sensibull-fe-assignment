@@ -1,0 +1,25 @@
+.table-body-row {
+  font-size: 1.2rem;
+}
+
+.table-body-row:nth-of-type(even) {
+  background-color: bisque;
+}
+
+.table-body-row:last-child td,
+.table-body-row:last-child th {
+  border: 0;
+}
+
+.table-body-cell {
+  margin: 0.5rem;
+}
+
+.symbol-link {
+  text-decoration: none;
+  color: black;
+}
+
+.symbol-link:hover {
+  color: blue;
+}

@@ -6,7 +6,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { SearchSharp } from "@mui/icons-material";
-import "./Searchbar.css";
 
 export const Searchbar = ({ searchHandler }) => {
   const theme = useTheme();

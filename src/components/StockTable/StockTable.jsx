@@ -9,10 +9,13 @@ import TableRow from "@mui/material/TableRow";
 import { Link } from "react-router-dom";
 import { Searchbar } from "../Searchbar/Searchbar";
 import { useEffect, useState } from "react";
+import { useTheme } from "@mui/material";
+import "./StockTable.css";
 
 export const StockTable = () => {
   let stockData = useInstruments();
   let [filteredData, setFilteredData] = useState([]);
+  const theme = useTheme();
 
   const columns = [
     {
@@ -30,11 +33,11 @@ export const StockTable = () => {
       label: "Category",
       align: "center",
     },
-    {
-      id: "validTill",
-      label: "Valid Till",
-      align: "center",
-    },
+    // {
+    //   id: "validTill",
+    //   label: "Valid Till",
+    //   align: "center",
+    // },
   ];
 
   useEffect(() => {
@@ -63,28 +66,59 @@ export const StockTable = () => {
   return (
     <>
       <Searchbar searchHandler={searchHandler} />
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: "80vh" }}>
+      <Paper
+        sx={{
+          margin: theme.spacing(0, "auto"),
+          overflow: "hidden",
+          width: "75%",
+        }}
+      >
+        <TableContainer
+          sx={{
+            maxHeight: "71vh",
+            margin: theme.spacing(0, "auto"),
+          }}
+        >
           <Table stickyHeader aria-label="sticky table">
-            <TableHead>
+            <TableHead className="table-head">
               <TableRow>
                 {columns.map((column) => (
-                  <TableCell key={column.id} align={column.align}>
+                  <TableCell
+                    sx={{
+                      backgroundColor: "#DF801B",
+                      color: "white",
+                      fontWeight: "bold",
+                      fontSize: "1rem",
+                    }}
+                    key={column.id}
+                    align={column.align}
+                    className="table-head-row"
+                  >
                     {column.label.toUpperCase()}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData.map((row) => {
+              {filteredData.map((row, idx) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
-                    <TableCell align="center">
-                      <Link to={`/quotes/${row.Symbol}`}>{row.Symbol}</Link>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row.idx}
+                    className="table-body-row"
+                  >
+                    <TableCell align="center" className="table-body-cell" >
+                      <Link
+                        className="symbol-link"
+                        to={`/quotes/${row.Symbol}`}
+                      >
+                        {row.Symbol}
+                      </Link>
                     </TableCell>
                     <TableCell align="center">{row.Name}</TableCell>
                     <TableCell align="center">{row.Sector}</TableCell>
-                    <TableCell align="center">{row.Validtill}</TableCell>
                   </TableRow>
                 );
               })}
