@@ -1,0 +1,25 @@
+.notfound-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.not-found-title {
+  font-size: 3rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.notfound-wrapper img {
+  height: 100%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.back-link {
+  text-decoration: none;
+  color: inherit;
+}

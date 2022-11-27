@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { Navbar } from "./components";
-import { Home, Quotes } from "./pages";
+import { Home, NotFound, Quotes } from "./pages";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/quotes/:symbol" element={<Quotes />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
