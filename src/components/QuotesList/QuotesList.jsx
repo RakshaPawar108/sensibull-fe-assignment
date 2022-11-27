@@ -12,16 +12,19 @@ import moment from "moment/moment";
 import { ArrowBackIos } from "@mui/icons-material";
 import "./QuotesList.css";
 import { useTheme } from "@mui/material";
+import { Loader } from "../Loader/Loader";
 
 export const QuotesList = () => {
   const location = useLocation().pathname.split("/")[2];
   const [quotes, setQuotes] = useState([]);
   const [validTill, setValidTill] = useState();
   const [currentTime, setCurrentTime] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const theme = useTheme();
 
   useEffect(() => {
     getQuotes(setQuotes, location);
+    setIsLoading(false)
   }, [location]);
 
   useEffect(() => {
@@ -77,42 +80,45 @@ export const QuotesList = () => {
         </Link>
       </Button>
       <SortOptions sortByTime={sortByTime} />
-      <nav className="list-wrapper">
-        <List sx={{ margin: theme.spacing(0, "30%") }}>
-          {quotes.map((quote, index) => {
-            return (
-              <ListItem key={index} align="center" sx={{ width: "100%" }}>
-                <Card sx={{ width: "100%", padding: "1rem" }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 16, padding: "0.5rem" }}
-                      gutterBottom
-                    >
-                      <strong>Price:</strong> {quote.price.toFixed(2)}
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: 16, padding: "0.5rem" }}
-                      gutterBottom
-                    >
-                      <strong>Time:</strong>{" "}
-                      {moment(quote.time).format("MMMM Do YYYY, h:mm:ss a")}
-                    </Typography>
-                    <Typography
-                      sx={{ fontSize: 16, padding: "0.5rem" }}
-                      gutterBottom
-                    >
-                      <strong>Valid Till:</strong>{" "}
-                      {moment(quote.valid_till).format(
-                        "MMMM Do YYYY, h:mm:ss a"
-                      )}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </ListItem>
-            );
-          })}
-        </List>
-      </nav>
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <nav className="list-wrapper">
+          <List sx={{ margin: theme.spacing(0, "30%") }}>
+            {quotes.map((quote, index) => {
+              return (
+                <ListItem key={index} align="center" sx={{ width: "100%" }}>
+                  <Card sx={{ width: "100%", padding: "1rem" }}>
+                    <CardContent>
+                      <Typography
+                        sx={{ fontSize: 16, padding: "0.5rem" }}
+                        gutterBottom
+                      >
+                        <strong>Price:</strong> {quote.price.toFixed(2)}
+                      </Typography>
+                      <Typography
+                        sx={{ fontSize: 16, padding: "0.5rem" }}
+                        gutterBottom
+                      >
+                        <strong>Time:</strong>{" "}
+                        {moment(quote.time).format("MMMM Do YYYY, h:mm:ss a")}
+                      </Typography>
+                      <Typography
+                        sx={{ fontSize: 16, padding: "0.5rem" }}
+                        gutterBottom
+                      >
+                        <strong>Valid Till:</strong>{" "}
+                        {moment(quote.valid_till).format(
+                          "MMMM Do YYYY, h:mm:ss a"
+                        )}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </ListItem>
+              );
+            })}
+          </List>
+        </nav>
+      )}
     </>
   );
 };

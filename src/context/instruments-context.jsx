@@ -11,7 +11,7 @@ const InstrumentProvider = ({ children }) => {
   }, []);
 
   return (
-    <InstrumentContext.Provider value={instruments}>
+    <InstrumentContext.Provider value={ instruments }>
       {children}
     </InstrumentContext.Provider>
   );
