@@ -4,14 +4,18 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { InstrumentProvider } from "./context/";
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./theme/theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <InstrumentProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </InstrumentProvider>
+    <ThemeProvider theme={theme}>
+      <InstrumentProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </InstrumentProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
