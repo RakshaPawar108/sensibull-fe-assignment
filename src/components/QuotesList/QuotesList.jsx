@@ -1,18 +1,24 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getQuotes } from "../../utils";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import { SortOptions } from "../SortOptions/SortOptions";
 import moment from "moment/moment";
+import { ArrowBackIos } from "@mui/icons-material";
+import "./QuotesList.css";
+import { useTheme } from "@mui/material";
 
 export const QuotesList = () => {
   const location = useLocation().pathname.split("/")[2];
   const [quotes, setQuotes] = useState([]);
   const [validTill, setValidTill] = useState();
   const [currentTime, setCurrentTime] = useState();
+  const theme = useTheme();
 
   useEffect(() => {
     getQuotes(setQuotes, location);
@@ -61,29 +67,47 @@ export const QuotesList = () => {
   };
   return (
     <>
+      <Button
+        className="back-btn"
+        sx={{ marginLeft: "10rem", marginBottom: "2rem" }}
+        startIcon={<ArrowBackIos />}
+      >
+        <Link className="back-link" to="/">
+          Back to Home Page
+        </Link>
+      </Button>
       <SortOptions sortByTime={sortByTime} />
-      <nav>
-        <List>
+      <nav className="list-wrapper">
+        <List sx={{ margin: theme.spacing(0, "30%") }}>
           {quotes.map((quote, index) => {
             return (
-              <ListItem key={index} align="center">
-                <ListItemButton>
-                  <ListItemText primary={`Price: ${quote.price}`} />
-                </ListItemButton>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`Time: ${moment(quote.time).format(
-                      "MMMM Do YYYY, h:mm:ss a"
-                    )}`}
-                  />
-                </ListItemButton>
-                <ListItemButton>
-                  <ListItemText
-                    primary={`Valid Till: ${moment(quote.valid_till).format(
-                      "MMMM Do YYYY, h:mm:ss a"
-                    )}`}
-                  />
-                </ListItemButton>
+              <ListItem key={index} align="center" sx={{ width: "100%" }}>
+                <Card sx={{ width: "100%", padding: "1rem" }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 16, padding: "0.5rem" }}
+                      gutterBottom
+                    >
+                      <strong>Price:</strong> {quote.price.toFixed(2)}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: 16, padding: "0.5rem" }}
+                      gutterBottom
+                    >
+                      <strong>Time:</strong>{" "}
+                      {moment(quote.time).format("MMMM Do YYYY, h:mm:ss a")}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: 16, padding: "0.5rem" }}
+                      gutterBottom
+                    >
+                      <strong>Valid Till:</strong>{" "}
+                      {moment(quote.valid_till).format(
+                        "MMMM Do YYYY, h:mm:ss a"
+                      )}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </ListItem>
             );
           })}
